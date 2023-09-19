@@ -9,7 +9,7 @@ function Login(){
             <input type="text" name="nome" placeholder="Nome"></input>
             <input type="text" name="senha" placeholder="Senha"></input>
             <div className="buttons">
-                <button style={{marginRight:"10%",backgroundColor:"#38040E",color:"white"}}>Login</button>
+                <Link to="/principal"><button style={{marginRight:"10%",backgroundColor:"#38040E",color:"white"}}>Login</button></Link>
                 <button style={{marginLeft:"10%",backgroundColor:"white",color:"#38040E"}}>Cancelar</button>
             </div>
             <p>Não possui conta?<Link to="/Cadastro">Cadastre-se</Link></p>

@@ -1,0 +1,44 @@
+
+.upper-bar{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    min-width: 100vw;
+    max-height: 20%;
+    background-color: #E5E5E5;
+}
+
+.upper-bar img{
+    max-height: 10vh;
+}
+
+.demandas-section{
+    justify-content: center;
+    padding: 20px;
+}
+
+.demandas-row{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.demanda{
+    border-style: solid;
+    border-radius: 10px;
+    width: 20%;
+    min-height: 18vh;
+    margin:5px;
+}
+
+.demanda button{
+    border-style: none;
+    background-color: #6A2921;
+    width: 100%;
+    border-radius: 0px 0px 7px 7px;
+    color: white;
+}
+
+.demanda p{
+    font-weight: bold;
+}
