@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./style.css"
 
 function Cadastro(){
+    const navigate = useNavigate()
+
+    const validarDados = ()=>{
+        let inputs = document.getElementsByName("nome")
+        let valor = inputs[0].value;
+
+        navigate("/principal",{state:{nome:valor}})
+    }
+
     return(
         <div id="container">
         <div className="form">
@@ -13,7 +23,7 @@ function Cadastro(){
             <input type="text" name="senha" placeholder="Senha"></input>
             <input type="text" name="senha" placeholder="Confirmar Senha"></input>
             <div className="buttons">
-                <button style={{marginRight:"10%",backgroundColor:"#38040E",color:"white"}}>Cadastrar-se</button>
+                <button onClick={validarDados} style={{marginRight:"10%",backgroundColor:"#38040E",color:"white"}}>Cadastrar-se</button>
                 <Link to="/"><button style={{marginLeft:"10%",backgroundColor:"white",color:"#38040E"}}>Cancelar</button></Link>
             </div>
             
