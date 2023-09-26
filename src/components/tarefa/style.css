@@ -1,0 +1,35 @@
+.tarefa-container{
+    position: relative;
+    border-style: solid;
+    border-radius: 10px;
+    width: 20%;
+    min-height: 18vh;
+    margin:5px;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.prod-name{
+    font-weight: lighter;
+}
+
+.status{
+    font-weight: bold;
+    color: #0068FF;
+}
+
+.button-tarefa-container{
+    max-height: 20%;
+    border-style: none;
+    background-color: #9A5330;
+    width: 100%;
+    border-radius: 0px 0px 7px 7px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    height:"61%";
+    width: 100%;
+}

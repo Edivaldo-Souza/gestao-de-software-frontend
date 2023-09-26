@@ -29,8 +29,8 @@ function Cadastro(){
                 </select>
             </div>
            
-            <input type="text" name="senha" placeholder="Senha"></input>
-            <input type="text" name="senha" placeholder="Confirmar Senha"></input>
+            <input type="password" name="pass" placeholder="Senha"></input>
+            <input type="password" name="confirma-pass" placeholder="Confirmar Senha"></input>
             <div className="buttons">
                 <button onClick={validarDados} style={{marginRight:"10%",backgroundColor:"#38040E",color:"white"}}>Cadastrar-se</button>
                 <Link to="/"><button style={{marginLeft:"10%",backgroundColor:"white",color:"#38040E"}}>Cancelar</button></Link>
