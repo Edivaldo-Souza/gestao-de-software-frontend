@@ -20,7 +20,7 @@
 }
 
 .buttons{
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .buttons button{
@@ -39,4 +39,14 @@
 .image img{
     max-height: 100vh;
     min-width: 100%;
+}
+
+.form select{
+    width: 30%;
+    height: 30px;
+    margin-left: 5px;
+    border-style: none;
+    border-radius: 10px;
+    background-color: #640D14;
+    color: white;
 }

@@ -1,0 +1,68 @@
+#cadastro-demanda{
+    display: none;
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    z-index: 9999;
+}
+
+.header{
+    display: flex;
+    justify-content: right;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #6A2921;
+    height: 7%;
+}
+
+.header img{
+    cursor: pointer;
+    height: 100%;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+.popup-content {
+    padding: 10px;
+}
+
+.popup-content input{
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #640D14;
+    height: 40px;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.popup-content textarea{
+    border-style: solid;
+    border-color: #640D14;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.popup-content button{
+    cursor: pointer;
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+    height: 5%;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #329A97;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}

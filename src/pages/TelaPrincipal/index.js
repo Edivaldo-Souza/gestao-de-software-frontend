@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react"
 import "./style.css"
 import { useLocation } from "react-router-dom"
+import CadastroDemanda from "../components/CadastroDemanda"
 
 function TelaPrincipal(){
     const location = useLocation()
     const [user] = useState(location.state)
+
+    const toggleCadastro = () =>{
+        document.getElementById("cadastro-demanda").style.display="block"
+        
+    }
 
     return(
         <div>
@@ -39,10 +45,31 @@ function TelaPrincipal(){
                         </div>
                     </div>
                 </div>
+                <div className="demandas-row">
+                    <div className="demanda">
+                        <p>Software de Atendimentos</p>
+                        <div className="button-demanda-container">
+                            <button>Ver detalhes</button>
+                        </div>
+                    </div>
+                    <div className="demanda">
+                        <p>Software de Atendimentos</p>
+                        <div className="button-demanda-container">
+                            <button>Ver detalhes</button>
+                        </div>
+                    </div>
+                    <div className="demanda">
+                        <p>Software de Atendimentos</p>
+                        <div className="button-demanda-container">
+                            <button>Ver detalhes</button>
+                        </div>
+                    </div>
+                </div>
                 <div className="create-demanda-button">
-                    <img src="images/dem.svg"/>
+                    <img onClick={toggleCadastro} src="images/dem.svg"/>
                 </div>
             </div>
+            <CadastroDemanda/>
         </div>
         )
 }
