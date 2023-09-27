@@ -8,6 +8,7 @@ import axios from "axios"
 function TelaPrincipal(){
     const location = useLocation()
     const [user] = useState(location.state)
+    const [permissao,setPermissao] = useState()
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="block"
@@ -15,14 +16,19 @@ function TelaPrincipal(){
     }
 
     const setCredentials = () =>{
-        /*axios({
+        axios({
             method:"get",
-            
-        })*/
+            url:"http://localhost:8080/api/usuario/"+user.nome   
+        })
+        .then(response=>{
+            setPermissao(response.data.tipoUsuario)
+            console.log("permissao:"+permissao)
+        })
+        .catch(error=>{console.log(error)})
     }
 
     useEffect(() => {
-        console.log(user.permissao)
+        setCredentials()
     });
 
     const prod = [

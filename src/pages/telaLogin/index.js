@@ -22,6 +22,7 @@ function Login(){
             axios.defaults.headers.common.Authorization = response.headers.getAuthorization()
             navigate("/principal",{state:{
                 nome:nomeLogin,
+
             }})
         })
         .catch(error => console.log(error))        
