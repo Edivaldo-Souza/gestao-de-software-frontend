@@ -3,6 +3,7 @@ import "./style.css"
 import { useLocation } from "react-router-dom"
 import CadastroDemanda from "../components/CadastroDemanda"
 import Demanda from '../../components/demanda/index.js'
+import axios from "axios"
 
 function TelaPrincipal(){
     const location = useLocation()
@@ -13,8 +14,15 @@ function TelaPrincipal(){
         
     }
 
+    const setCredentials = () =>{
+        /*axios({
+            method:"get",
+            
+        })*/
+    }
+
     useEffect(() => {
-        document.title = `Home: dev4U()`;
+        console.log(user.permissao)
     });
 
     const prod = [

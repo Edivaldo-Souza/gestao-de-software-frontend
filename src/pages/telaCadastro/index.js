@@ -21,14 +21,14 @@ function Cadastro(){
             <input type="text" name="senha" placeholder="Confirmar Email"></input>
             <input type="text" name="senha" placeholder="Contato" style={{marginBottom:"0px"}}></input>
             <div style={{display:"flex",width:"80%",alignItems:"center",margin:"1% 10%"}}>
-                 <p >Tipo de usuário:</p>
+                <p>Tipo de usuário:</p>
                 <select name="cargo">
                 <option>Cliente</option>
                 <option>Avaliador</option>
                 <option>Desenvolvedor</option>
                 </select>
             </div>
-           
+            
             <input type="password" name="pass" placeholder="Senha"></input>
             <input type="password" name="confirma-pass" placeholder="Confirmar Senha"></input>
             <div className="buttons">

@@ -1,15 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 import "./style.css"
 
 function Login(){
     const navigate = useNavigate()
 
     const validarDados = ()=>{
-        let inputs = document.getElementsByName("email")
-        let valor = inputs[0].value;
+        let inputs = document.getElementsByTagName("input")
+        let nomeLogin = inputs[0].value;
+        let senhaLogin = inputs[1].value
 
-        navigate("/principal",{state:{nome:valor}})
+        axios({
+            method:"post",
+            url:"http://localhost:8080/api/login",
+            data:{
+                nome:nomeLogin,
+                senha:senhaLogin
+            }
+        })
+        .then(response=>{
+            axios.defaults.headers.common.Authorization = response.headers.getAuthorization()
+            navigate("/principal",{state:{
+                nome:nomeLogin,
+            }})
+        })
+        .catch(error => console.log(error))        
     }
+
     return(
        <div id="container">
         <div className="form">
