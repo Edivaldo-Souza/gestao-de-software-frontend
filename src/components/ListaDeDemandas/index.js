@@ -4,7 +4,12 @@ import Demanda from "../demanda"
 
 class ListaDeDemandas extends Component{
     state = {
-        demandas:[]
+        demandas:[],
+        cont:this.props.contador
+    }
+
+    componentDidUpdate(){
+        this.defineSearch()
     }
 
     componentDidMount(){
@@ -30,6 +35,7 @@ class ListaDeDemandas extends Component{
         })
         .then(response=>{
             this.setState({demandas:response.data})
+            this.setState({cont:1})
             console.log(response)
         })
         .catch(error=>console.log(error))
@@ -38,14 +44,12 @@ class ListaDeDemandas extends Component{
 
     render(){
         
-
         return(
             <div className="demandas-row">
                 {this.state.demandas.map((prod, index) => (
                     <Demanda key={index} title={prod.titulo} notes={prod.descricao}/>
                 ))}
             </div>
-
         )
     }
 }

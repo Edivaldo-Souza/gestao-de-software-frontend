@@ -1,5 +1,6 @@
 import "./style.css"
 import axios from "axios"
+import { useState } from "react"
 
 function CadastroDemanda(props){
 
@@ -19,7 +20,6 @@ function CadastroDemanda(props){
             }
         })
         .then(response=>{
-            console.log(props.nome)
             toggleCadastro()
         })
         .catch(error=>{
@@ -27,8 +27,18 @@ function CadastroDemanda(props){
             console.log(error)})
     }
 
+    const novaDemanda = () =>{
+        createDemanda()
+        enviarDados()
+    }
+
+    const enviarDados = () =>{
+        props.enviarDadosTelaPrincipal(1)
+    }
+
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="none" 
+        
     }
 
     return(
@@ -38,7 +48,7 @@ function CadastroDemanda(props){
            <div style={{display:"flex",justifyContent:"left"}}><h1 style={{fontFamily:"sans-serif"}}>Criar Demanda</h1></div>
            <input id="cadastro-titulo-demanda" placeholder="Título"></input>
            <textarea id="cadastro-descricao-demanda" placeholder="Descrição"></textarea>
-           <button onClick={createDemanda}>Cadastrar pedido</button> 
+           <button onClick={novaDemanda}>Cadastrar pedido</button> 
         </div>
     </div>
     )

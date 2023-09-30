@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react"
 import "./style.css"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import CadastroDemanda from "../../components/CadastroDemanda"
-import Demanda from '../../components/demanda/index.js'
-import axios from "axios"
 import ListaDeDemandas from "../../components/ListaDeDemandas"
 
 function TelaPrincipal(){
     const location = useLocation()
     const [user,setUser] = useState(location.state.user)
+    const [contador,setContador] = useState(0)
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="block"
-        
-    }    
+    }   
+
+    const receberDadosCadastro = (dados) =>{
+        setContador(dados)
+    }
 
     const prod = [
         {title:'Software de Atendimento', notes:'Tá indo'},
@@ -35,37 +37,21 @@ function TelaPrincipal(){
     return(
         <div>
             <div className="upper-bar">
+                <div style={{display:"flex",width:"90%"}}>
+                    <Link to="/"><img src="images/exit.png"/></Link></div>
                 <p>{user.nome}</p>
                 <img src="images/profile_picture.png"/>
             </div>
             <div className="demandas-section">
                 
-                <ListaDeDemandas user={user}/>
-                <div className="demandas-row">
-                    <div className="demanda">
-                        <p>Software de Atendimentos</p>
-                        <div className="button-demanda-container">
-                            <button>Ver detalhes</button>
-                        </div>
-                    </div>
-                    <div className="demanda">
-                        <p>Software de Atendimentos</p>
-                        <div className="button-demanda-container">
-                            <button>Ver detalhes</button>
-                        </div>
-                    </div>
-                    <div className="demanda">
-                        <p>Software de Atendimentos</p>
-                        <div className="button-demanda-container">
-                            <button>Ver detalhes</button>
-                        </div>
-                    </div>
-                </div>
+                <ListaDeDemandas user={user} contador={contador}/>
+                
                 <div className="create-demanda-button">
                     <img onClick={toggleCadastro} src="images/dem.svg"/>
                 </div>
+                
             </div>
-            <CadastroDemanda uuidcliente={user.uuid}/>
+            <CadastroDemanda uuidcliente={user.uuid} enviarDadosTelaPrincipal={receberDadosCadastro}/>
         </div>
         )
 }
