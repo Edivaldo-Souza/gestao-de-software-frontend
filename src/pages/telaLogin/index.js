@@ -5,6 +5,17 @@ import "./style.css"
 function Login(){
     const navigate = useNavigate()
 
+    const setCredentials = (nome) =>{
+        axios({
+            method:"get",
+            url:"http://localhost:8080/api/usuario/"+nome   
+        })
+        .then(response=>{
+            navigate("/principal",{state:{user:response.data}})
+        })
+        .catch(error=>{console.log(error)})
+    }
+
     const validarDados = ()=>{
         let inputs = document.getElementsByTagName("input")
         let nomeLogin = inputs[0].value;
@@ -20,10 +31,7 @@ function Login(){
         })
         .then(response=>{
             axios.defaults.headers.common.Authorization = response.headers.getAuthorization()
-            navigate("/principal",{state:{
-                nome:nomeLogin,
-
-            }})
+            setCredentials(nomeLogin)
         })
         .catch(error => console.log(error))        
     }

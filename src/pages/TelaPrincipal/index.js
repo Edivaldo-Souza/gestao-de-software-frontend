@@ -1,35 +1,19 @@
 import { useEffect, useState } from "react"
 import "./style.css"
 import { useLocation } from "react-router-dom"
-import CadastroDemanda from "../components/CadastroDemanda"
+import CadastroDemanda from "../../components/CadastroDemanda"
 import Demanda from '../../components/demanda/index.js'
 import axios from "axios"
+import ListaDeDemandas from "../../components/ListaDeDemandas"
 
 function TelaPrincipal(){
     const location = useLocation()
-    const [user] = useState(location.state)
-    const [permissao,setPermissao] = useState()
+    const [user,setUser] = useState(location.state.user)
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="block"
         
-    }
-
-    const setCredentials = () =>{
-        axios({
-            method:"get",
-            url:"http://localhost:8080/api/usuario/"+user.nome   
-        })
-        .then(response=>{
-            setPermissao(response.data.tipoUsuario)
-            console.log("permissao:"+permissao)
-        })
-        .catch(error=>{console.log(error)})
-    }
-
-    useEffect(() => {
-        setCredentials()
-    });
+    }    
 
     const prod = [
         {title:'Software de Atendimento', notes:'Tá indo'},
@@ -55,11 +39,8 @@ function TelaPrincipal(){
                 <img src="images/profile_picture.png"/>
             </div>
             <div className="demandas-section">
-                <div className="demandas-row">
-                    {demandasExibidas.map((prod, index) => (
-                        <Demanda key={index} title={prod.title} notes={prod.notes}/>
-                    ))}
-                </div>
+                
+                <ListaDeDemandas user={user}/>
                 <div className="demandas-row">
                     <div className="demanda">
                         <p>Software de Atendimentos</p>
@@ -84,7 +65,7 @@ function TelaPrincipal(){
                     <img onClick={toggleCadastro} src="images/dem.svg"/>
                 </div>
             </div>
-            <CadastroDemanda/>
+            <CadastroDemanda uuidcliente={user.uuid}/>
         </div>
         )
 }
