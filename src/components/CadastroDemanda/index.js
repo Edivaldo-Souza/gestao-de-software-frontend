@@ -9,6 +9,7 @@ function CadastroDemanda(props){
         let input2 = document.getElementById("cadastro-descricao-demanda")
         let tituloCad = input1.value
         let descricaoCad = input2.value
+        let dataAtual = new Date('2000-10-10')
 
         axios({
             method:"post",
@@ -16,7 +17,8 @@ function CadastroDemanda(props){
             data:{
                 titulo:tituloCad,
                 descricao:descricaoCad,
-                uuidCliente:props.uuidcliente
+                uuidCliente:props.uuidcliente,
+                dataCriacao: dataAtual
             }
         })
         .then(response=>{

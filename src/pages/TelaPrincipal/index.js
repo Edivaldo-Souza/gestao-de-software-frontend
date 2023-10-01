@@ -3,10 +3,17 @@ import "./style.css"
 import { Link, useLocation } from "react-router-dom"
 import CadastroDemanda from "../../components/CadastroDemanda"
 import ListaDeDemandas from "../../components/ListaDeDemandas"
+import DadosDemanda from "../../components/DadosDaDemanda"
 
 function TelaPrincipal(){
     const location = useLocation()
     const [user,setUser] = useState(location.state.user)
+    const [dadosDemanda,setDadosDemanda] = useState({
+        titulo:"",
+        descricao:"",
+        dataCriacao:"",
+        dataEncerramento:"",
+    })
     const [contador,setContador] = useState(0)
 
     const toggleCadastro = () =>{
@@ -17,22 +24,19 @@ function TelaPrincipal(){
         setContador(dados)
     }
 
-    const prod = [
-        {title:'Software de Atendimento', notes:'Tá indo'},
-        {title:'Software de Balanceamento', notes:'Tá indo'},
-        {title:'Produto sem nome', notes:'Tá indo'},
-        {title:'Programa de receitas', notes:'Tá indo'},
-        {title:'Produto sem nome', notes:'Tá indo'},
-        {title:'Produto sem nome', notes:'Tá indo'},
-        {title:'Software 5', notes:'Tá indo'},
-        {title:'Software 6', notes:'Tá indo'},
-        {title:'Software 7', notes:'Tá indo'},
-        {title:'Software 8', notes:'Tá indo'},
-        {title:'Software 9', notes:'Tá indo'},
-        {title:'Software 39', notes:'Tá indo'},
-    ];
+    const receberDadosDemanda = (dados)=>{
+        setDadosDemanda(dados)
+    }
 
-    const demandasExibidas = prod.slice(0, 8);
+    const disableCadastro = () =>{
+        if(user.tipoUsuario==1 || user.tipoUsuario==2){
+           document.getElementsByClassName("create-demanda-button")[0].style.display="none" 
+        }
+    }
+
+    useEffect(()=>{
+        disableCadastro()
+    },[])
 
     return(
         <div>
@@ -44,13 +48,14 @@ function TelaPrincipal(){
             </div>
             <div className="demandas-section">
                 
-                <ListaDeDemandas user={user} contador={contador}/>
+                <ListaDeDemandas user={user} contador={contador} enviarDados={receberDadosDemanda}/>
                 
                 <div className="create-demanda-button">
                     <img onClick={toggleCadastro} src="images/dem.svg"/>
                 </div>
                 
             </div>
+            <DadosDemanda dados={dadosDemanda}/>
             <CadastroDemanda uuidcliente={user.uuid} enviarDadosTelaPrincipal={receberDadosCadastro}/>
         </div>
         )

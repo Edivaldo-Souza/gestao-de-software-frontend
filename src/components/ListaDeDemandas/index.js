@@ -2,56 +2,57 @@ import axios from "axios"
 import { Component, useEffect, useState } from "react"
 import Demanda from "../demanda"
 
-class ListaDeDemandas extends Component{
-    state = {
-        demandas:[],
-        cont:this.props.contador
-    }
+function ListaDeDemandas(props){
+    const [demandas,setDemandas] = useState([])
+    const [cont,setCont] = useState(props.contador)
 
-    componentDidUpdate(){
-        this.defineSearch()
-    }
 
-    componentDidMount(){
-        this.defineSearch()
-    }
-
-    defineSearch = () =>{
+    const defineSearch = () =>{
         let url_busca
-        if(this.props.user.tipoUsuario==0){
-            url_busca = "http://localhost:8080/api/demanda/cliente/"+this.props.user.uuid
+        if(props.user.tipoUsuario==0){
+            url_busca = "http://localhost:8080/api/demanda/cliente/"+props.user.uuid
         }
-        else if(this.props.user.tipoUsuario==1){
+        else if(props.user.tipoUsuario==1){
             url_busca = "http://localhost:8080/api/demanda"
         }
-        else if(this.props.user.tipoUsuario==2){
-            url_busca = "http://localhost:8080/api/demanda/dev/"+this.props.user.uuid
+        else if(props.user.tipoUsuario==2){
+            url_busca = "http://localhost:8080/api/demanda/dev/"+props.user.uuid
         }
 
         axios({
             method:"get",
+            headers:{
+                "Content-Type":"application/json; charset=UTF-8",
+            },
             url:url_busca,
 
         })
         .then(response=>{
-            this.setState({demandas:response.data})
-            this.setState({cont:1})
+            setDemandas(response.data)
             console.log(response)
         })
         .catch(error=>console.log(error))
 
     }
 
-    render(){
-        
+    const receberDados = (dados)=>{
+        props.enviarDados(dados)
+    }
+
+    useEffect(()=>{
+        defineSearch()
+    },[])
+
+
         return(
             <div className="demandas-row">
-                {this.state.demandas.map((prod, index) => (
-                    <Demanda key={index} title={prod.titulo} notes={prod.descricao}/>
+                <p>{props.contador}</p>
+                {demandas.map((prod, index) => (
+                    <Demanda key={index} title={prod.titulo} notes={prod.descricao} info={prod} enviarDados={receberDados}/>
                 ))}
             </div>
         )
-    }
+
 }
 
 export default ListaDeDemandas

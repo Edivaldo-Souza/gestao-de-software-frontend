@@ -1,5 +1,6 @@
 
 .upper-bar{
+    opacity: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -27,6 +28,7 @@
 }
 
 .demanda{
+    
     position: relative;
     border-style: solid;
     border-radius: 10px;
@@ -57,8 +59,8 @@
 }
 
 .create-demanda-button{
-    position: absolute;
-    bottom: 8px;
+    position: fixed;
+    bottom: 1vh;
     right: 8px;
     display: flex;
     justify-content: center;
