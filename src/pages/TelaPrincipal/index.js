@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react"
 import "./style.css"
 import { useLocation } from "react-router-dom"
-import CadastroDemanda from "../components/CadastroDemanda"
+//import CadastroDemanda from "../../components/CadastroDemanda"
 import Demanda from '../../components/demanda/index.js'
+import Modal from "../../components/modal"
 
 function TelaPrincipal(){
     const location = useLocation()
     const [user] = useState(location.state)
-
-    const toggleCadastro = () =>{
-        document.getElementById("cadastro-demanda").style.display="block"
-        
-    }
 
     useEffect(() => {
         document.title = `Home: dev4U()`;
@@ -32,6 +28,8 @@ function TelaPrincipal(){
         {title:'Software 39', notes:'Tá indo'},
     ];
 
+    const [openModal, setOpenModal] = useState(false);
+
     const demandasExibidas = prod.slice(0, 8);
 
     return(
@@ -46,31 +44,11 @@ function TelaPrincipal(){
                         <Demanda key={index} title={prod.title} notes={prod.notes}/>
                     ))}
                 </div>
-                <div className="demandas-row">
-                    <div className="demanda">
-                        <p>Software de Atendimentos</p>
-                        <div className="button-demanda-container">
-                            <button>Ver detalhes</button>
-                        </div>
-                    </div>
-                    <div className="demanda">
-                        <p>Software de Atendimentos</p>
-                        <div className="button-demanda-container">
-                            <button>Ver detalhes</button>
-                        </div>
-                    </div>
-                    <div className="demanda">
-                        <p>Software de Atendimentos</p>
-                        <div className="button-demanda-container">
-                            <button>Ver detalhes</button>
-                        </div>
-                    </div>
-                </div>
                 <div className="create-demanda-button">
-                    <img onClick={toggleCadastro} src="images/dem.svg"/>
+                    <img onClick={() => {setOpenModal(true)}} src="images/dem.svg"/>
                 </div>
             </div>
-            <CadastroDemanda/>
+            <Modal isOpen={openModal}/>
         </div>
         )
 }
