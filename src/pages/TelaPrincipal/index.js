@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom"
 import CadastroDemanda from "../../components/CadastroDemanda"
 import ListaDeDemandas from "../../components/ListaDeDemandas"
 import DadosDemanda from "../../components/DadosDaDemanda"
+import axios from "axios"
 
 function TelaPrincipal(){
     const location = useLocation()
     const [user,setUser] = useState(location.state.user)
+    var devs = []
     const [dadosDemanda,setDadosDemanda] = useState({
         titulo:"",
         descricao:"",
@@ -15,6 +17,7 @@ function TelaPrincipal(){
         dataEncerramento:"",
     })
     const [contador,setContador] = useState(0)
+
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="block"
@@ -29,6 +32,7 @@ function TelaPrincipal(){
     }
 
     const disableCadastro = () =>{
+        
         if(user.tipoUsuario==1 || user.tipoUsuario==2){
            document.getElementsByClassName("create-demanda-button")[0].style.display="none" 
         }
@@ -55,7 +59,7 @@ function TelaPrincipal(){
                 </div>
                 
             </div>
-            <DadosDemanda dados={dadosDemanda}/>
+            <DadosDemanda dados={dadosDemanda} contador={contador} usuario={user} tipoUsuario={user.tipoUsuario} desenvolvedores={devs}/>
             <CadastroDemanda uuidcliente={user.uuid} enviarDadosTelaPrincipal={receberDadosCadastro}/>
         </div>
         )

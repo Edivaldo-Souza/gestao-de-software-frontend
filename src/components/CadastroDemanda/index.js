@@ -9,7 +9,10 @@ function CadastroDemanda(props){
         let input2 = document.getElementById("cadastro-descricao-demanda")
         let tituloCad = input1.value
         let descricaoCad = input2.value
-        let dataAtual = new Date('2000-10-10')
+        let dia = new Date().getDate()
+        let mes = new Date().getMonth()
+        let ano = new Date().getFullYear()
+        let dataAtual = dia+"/"+mes+"/"+ano
 
         axios({
             method:"post",

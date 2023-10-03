@@ -9,11 +9,12 @@ function ListaDeDemandas(props){
 
     const defineSearch = () =>{
         let url_busca
+        let demandasFiltradas = []
         if(props.user.tipoUsuario==0){
             url_busca = "http://localhost:8080/api/demanda/cliente/"+props.user.uuid
         }
         else if(props.user.tipoUsuario==1){
-            url_busca = "http://localhost:8080/api/demanda"
+            url_busca = "http://localhost:8080/api/demanda/emAnalise"
         }
         else if(props.user.tipoUsuario==2){
             url_busca = "http://localhost:8080/api/demanda/dev/"+props.user.uuid
@@ -28,7 +29,17 @@ function ListaDeDemandas(props){
 
         })
         .then(response=>{
-            setDemandas(response.data)
+            if(props.user.tipoUsuario==2){
+                for(let x of response.data){
+                    if(x.situacao==1){
+                        demandasFiltradas.push(x)
+                    }
+                }
+                setDemandas(demandasFiltradas)
+            }
+            else{
+                setDemandas(response.data)
+            }
             console.log(response)
         })
         .catch(error=>console.log(error))
@@ -48,7 +59,7 @@ function ListaDeDemandas(props){
             <div className="demandas-row">
                 <p>{props.contador}</p>
                 {demandas.map((prod, index) => (
-                    <Demanda key={index} title={prod.titulo} notes={prod.descricao} info={prod} enviarDados={receberDados}/>
+                    <Demanda key={index} title={prod.titulo} notes={prod.descricao} quant={index} info={prod} enviarDados={receberDados}/>
                 ))}
             </div>
         )
