@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
+import Tarefa from "../TarefaC"
 import "./style.css"
 import axios from "axios"
 
 function DadosDemanda(props){
     const [prioridade,setPrioridade] = useState(0)
     const [devs,setDevs] = useState(props.desenvolvedores)
+    const [tarefas,setTarefas] = useState(props.tarefas)
     const [devSelecionado,setDevSelecionado] = useState()
     const [valorDaPrioridade,setValorDaPrioridade] = useState(["Baixa","Média","Alta"])
     const [valorDaSituacao,setValorDaSituacao] = useState(["Em análise","Submetida","Concluída","Indeferida"])
+    const [cont,setCont] = useState(0)
     const [dataEncerramento,setDataEncerramento] = useState("Não definido")
-    const [updateState,setUpdateState] = useState()
 
 
     const setClearence = () =>{
@@ -23,12 +25,16 @@ function DadosDemanda(props){
             document.getElementsByClassName("prazo")[0].style.display="none"
             document.getElementsByClassName("dev-buttons")[0].style.display="none"
             document.getElementsByClassName("dev-buttons")[1].style.display="none"
+            document.getElementsByClassName("tarefas-container")[0].style.display="none"
+            document.getElementById("tarefas-input").style.display="none"
+            document.getElementById("add-tarefa-button").style.display="none"
         }
     }
 
     const closePopUp = () =>{
         document.getElementById("dados-demanda").style.display="none"
-        setUpdateState("ds") 
+        let data = new Date()
+        props.enviarDados(data.getSeconds())
     }
 
     const changePrioridade = (select)=>{
@@ -99,13 +105,13 @@ function DadosDemanda(props){
         .catch(error=>console.log(error))
     }
 
-    const concluirProduto = () =>{
+    const concluirProduto = (i) =>{
         axios({
             method:"put",
             url:"http://localhost:8080/api/demanda/concluir",
             data:{
                 uuid:props.dados.uuid,
-                situacao:2,
+                situacao:i,
             }
         }).then(response=>{
             console.log(response.data)
@@ -130,22 +136,70 @@ function DadosDemanda(props){
         setDevSelecionado(select)
     }
 
+    const addTarefa = () =>{
+        let tarefa = document.getElementById("tarefas-input").value
+
+        axios({
+            method:"post",
+            url:"http://localhost:8080/api/tarefa",
+            data:{
+                uuidDemanda:props.dados.uuid,
+                texto: tarefa
+            }
+        })
+        .then(response=>
+            {console.log(response.data)
+             setCont(cont+1)
+            }
+        )
+        .catch(error=>console.log(error))
+    }
+
+    const getTarefas = () =>{
+        axios({
+            method:"get",
+            url:"http://localhost:8080/api/tarefa/"+props.dados.uuid,
+        }) 
+        .then(response=>{
+            setTarefas(response.data)
+        })
+        .catch(error=>console.log(error))
+      }
+
+    const deleteTarefa = () =>{
+        setCont(cont+1)
+    }
+
     useEffect(()=>{
         setClearence()
         getDevs()
+       
     },[])
+
+    useEffect(()=>{
+        if(props.tarefas!=[]){
+            setTarefas(props.tarefas)
+        }
+    },[props.tarefas])
+
+    useEffect(()=>{
+        getTarefas()
+    },[cont])
+
 
     return(
     <div id="dados-demanda">
+        <div style={{display:"block",width:"100%"}}>
         <div className="header"><img onClick={closePopUp} src="images/close.svg"/></div>
-        <div className="info-container">
+        <div style={{display:"flex", width:"100%", padding:"20px 0px"}}>
+           <div className="info-container">
             <h3>Nome do produto: {props.dados.titulo}</h3>
-            <p>Descrição: {props.dados.descricao}</p>
-            <p>Data de Criação: {props.dados.dataCriacao}</p>
-            <p>Data de Encerramento: {props.dados.dataEncerramento}</p>
-            <p>Prioridade: {valorDaPrioridade[props.dados.prioridade]}</p>
-            <p>Situação: {valorDaSituacao[props.dados.situacao]}</p>
-            <p>Prazo em dias: {props.dados.prazo}</p>
+            <p style={{display:"flex"}}>Descrição: {props.dados.descricao}</p>
+            <p style={{display:"flex"}}>Data de Criação: {props.dados.dataCriacao}</p>
+            <p style={{display:"flex"}}>Data de Encerramento: {props.dados.dataEncerramento}</p>
+            <p style={{display:"flex"}}>Prioridade: {valorDaPrioridade[props.dados.prioridade]}</p>
+            <p style={{display:"flex"}}>Situação: {valorDaSituacao[props.dados.situacao]}</p>
+            <p style={{display:"flex"}}>Prazo em dias: {props.dados.prazo}</p>
             <div style={{display:"flex",width:"80%",alignItems:"center",margin:"0% 10%"}} className="selecionaveis">
             <p>Definir prioridade:</p>
                 <select onChange={(e)=>{changePrioridade(e.target.value)}} name="prioridade">
@@ -169,10 +223,19 @@ function DadosDemanda(props){
                 <input id="dias-input"/>
             </div>  
         </div>
+        <div className="tarefas-container">
+            {tarefas.map((t,index)=>(
+                <Tarefa key={index} dados={t} infoDelete={deleteTarefa}/>
+            ))}
+        </div>
+        </div>
+        <textarea id="tarefas-input" style={{width:"50%",marginLeft:"40%"}}></textarea>
+        <button id="add-tarefa-button"onClick={addTarefa} style={{bottom:"15%",right:"5%",backgroundColor:"#6A2921"}}>Adicionar</button> 
         <button className="avaliador-buttons" style={{bottom: "12%"}} onClick={submeterDemanda}>Encaminhar Demanda</button>
-        <button  className="avaliador-buttons" style={{backgroundColor:"red"}}>Indefir Demanda</button>
-        <button  className="dev-buttons" onClick={definirDataEncerramento} style={{bottom: "12%"}}>Salvar Alterações</button>
-        <button  className="dev-buttons" onClick={concluirProduto}style={{backgroundColor:"green"}}>Concluir Produto</button>
+        <button  className="avaliador-buttons" onClick={()=>concluirProduto(3)} style={{backgroundColor:"red"}}>Indefir Demanda</button>
+        <button  className="dev-buttons" onClick={definirDataEncerramento} style={{bottom: "12%",left:"5%"}}>Salvar Alterações</button>
+        <button  className="dev-buttons" onClick={()=>concluirProduto(2)}style={{backgroundColor:"green",left:"5%"}}>Concluir Produto</button>
+        </div>
     </div>
     )
 }

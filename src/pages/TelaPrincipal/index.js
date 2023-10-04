@@ -9,6 +9,9 @@ import axios from "axios"
 function TelaPrincipal(){
     const location = useLocation()
     const [user,setUser] = useState(location.state.user)
+    const [tarefas,setTarefas] = useState([{
+        texto:""
+    }])
     var devs = []
     const [dadosDemanda,setDadosDemanda] = useState({
         titulo:"",
@@ -27,8 +30,14 @@ function TelaPrincipal(){
         setContador(dados)
     }
 
-    const receberDadosDemanda = (dados)=>{
+    const receberDadosDemanda = (dados,tarefas)=>{
+        console.log(tarefas)
         setDadosDemanda(dados)
+        setTarefas(tarefas)
+    }
+
+    const receberAtualizacaoDemanda = (dados) =>{
+        setContador(dados)
     }
 
     const disableCadastro = () =>{
@@ -59,7 +68,7 @@ function TelaPrincipal(){
                 </div>
                 
             </div>
-            <DadosDemanda dados={dadosDemanda} contador={contador} usuario={user} tipoUsuario={user.tipoUsuario} desenvolvedores={devs}/>
+            <DadosDemanda dados={dadosDemanda} tarefas={tarefas} enviarDados={receberAtualizacaoDemanda} usuario={user} tipoUsuario={user.tipoUsuario} desenvolvedores={devs}/>
             <CadastroDemanda uuidcliente={user.uuid} enviarDadosTelaPrincipal={receberDadosCadastro}/>
         </div>
         )

@@ -4,7 +4,6 @@ import Demanda from "../demanda"
 
 function ListaDeDemandas(props){
     const [demandas,setDemandas] = useState([])
-    const [cont,setCont] = useState(props.contador)
 
 
     const defineSearch = () =>{
@@ -46,14 +45,18 @@ function ListaDeDemandas(props){
 
     }
 
-    const receberDados = (dados)=>{
-        props.enviarDados(dados)
+    const receberDados = (dados,tarefas)=>{
+        console.log(tarefas)
+        props.enviarDados(dados,tarefas)
     }
 
     useEffect(()=>{
         defineSearch()
     },[])
 
+    useEffect(()=>{
+        defineSearch()
+    },[props.contador])
 
         return(
             <div className="demandas-row">

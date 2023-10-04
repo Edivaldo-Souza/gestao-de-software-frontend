@@ -1,0 +1,26 @@
+.tarefa-container-info{
+    border-style: solid;
+    border-radius: 10px;
+    width: 95%;
+    min-height: 10vh;
+    margin:5px;
+}
+
+.tarefa-header{
+    display: flex;
+    justify-content: right;
+    border-radius: 7px 7px 0px 0px;
+    top: 0px;
+    width: 100%;
+    background-color: #6A2921;
+}
+
+.tarefa-header p{
+    width: 95%;
+    color: white;
+}
+
+.tarefa-header img{
+    cursor: pointer;
+    width: 3%;
+}
