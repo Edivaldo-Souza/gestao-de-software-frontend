@@ -43,7 +43,6 @@ function CadastroDemanda(props){
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="none" 
-        
     }
 
     return(

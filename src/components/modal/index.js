@@ -1,15 +1,18 @@
 import { useState } from "react";
 import './style.css';
 
-function Modal({isOpen}){
-    
-    const [isModalOpen, setIsModalOpen] = useState(false);
+function Modal({isOpen, setModalOpen, children}){
     
     if (isOpen) {
         return(
             <div className="background-modal">
                 <div className="modal">
-                    modal
+                    <div className="header-modal">
+                        <img className="icon-modal" onClick={setModalOpen} src="images/close3.svg"/>
+                    </div>
+                    <div className="body-modal">
+                    {children}
+                    </div>
                 </div> 
             </div>  
         );    

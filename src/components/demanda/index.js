@@ -47,8 +47,6 @@ function Demanda(props) {
   useEffect(()=>{
     definirSituacao()
   },[])
-
-  //TODO: fazer um componente para o modal que vai ser chamado em cada botão
   return (
     <div className="demanda-container">
       <img className="delete-demanda-button" onClick={deleteDemanda} style={{right:"2%",cursor:"pointer"}} src="images/close2.svg"/>

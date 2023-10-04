@@ -59,8 +59,6 @@ function TelaPrincipal(){
                 </div>
             </div>
 
-
-
             <div className="demandas-section">
                     <div className="demandas-row">
                         
@@ -73,9 +71,11 @@ function TelaPrincipal(){
                 <img onClick={() => { setOpenModal(true) } } src="images/dem.svg" />
             </div>
 
-            <Modal isOpen={openModal} />
+            <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+                <CadastroDemanda uuidcliente={user.uuid} enviarDadosTelaPrincipal={receberDadosCadastro} />
+            </Modal>
+
             <DadosDemanda dados={dadosDemanda} contador={contador} usuario={user} tipoUsuario={user.tipoUsuario} desenvolvedores={devs} />
-            <CadastroDemanda uuidcliente={user.uuid} enviarDadosTelaPrincipal={receberDadosCadastro} />
         </div>
         )
 }
