@@ -19,7 +19,7 @@ function TelaPrincipal(){
         dataCriacao:"",
         dataEncerramento:"",
     })
-    const [contador,setContador] = useState(0)
+    const [contador,setContador] = useState()
 
 
     const toggleCadastro = () =>{
@@ -37,6 +37,7 @@ function TelaPrincipal(){
     }
 
     const receberAtualizacaoDemanda = (dados) =>{
+        console.log(dados)
         setContador(dados)
     }
 

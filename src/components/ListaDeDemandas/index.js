@@ -4,6 +4,7 @@ import Demanda from "../demanda"
 
 function ListaDeDemandas(props){
     const [demandas,setDemandas] = useState([])
+    const [cont,setCont] = useState(3)
 
 
     const defineSearch = () =>{
@@ -50,19 +51,23 @@ function ListaDeDemandas(props){
         props.enviarDados(dados,tarefas)
     }
 
+    const receberAtualizacaoPorRemocao = ()=>{
+        setCont(cont+1)
+    }
+
     useEffect(()=>{
         defineSearch()
     },[])
 
     useEffect(()=>{
         defineSearch()
-    },[props.contador])
+    },[props.contador,cont])
 
         return(
             <div className="demandas-row">
                 <p>{props.contador}</p>
                 {demandas.map((prod, index) => (
-                    <Demanda key={index} title={prod.titulo} notes={prod.descricao} quant={index} info={prod} enviarDados={receberDados}/>
+                    <Demanda key={index} title={prod.titulo} notes={prod.descricao} quant={index} info={prod} remocao={receberAtualizacaoPorRemocao} enviarDados={receberDados}/>
                 ))}
             </div>
         )

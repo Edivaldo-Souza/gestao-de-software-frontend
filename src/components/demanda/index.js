@@ -25,21 +25,24 @@ function Demanda(props) {
       method:"delete",
       url:"http://localhost:8080/api/demanda/"+dados.uuid
     })
-    .then(response=>{alert("Demanda removida")})
+    .then(response=>{
+      alert("Demanda removida")
+      props.remocao()
+    })
     .catch(error=>console.log(error))
   }
 
   const definirSituacao = () =>{
-    if(dados.situacao==1){
+    if(props.info.situacao==1){
       document.getElementsByClassName("delete-demanda-button")[props.quant].style.display="none"
       document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="block"
     }
-    else if(dados.situacao==2){
+    else if(props.info.situacao==2){
       document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="none"
       document.getElementsByClassName("situation-icon-deleted")[props.quant].style.display="none"
       document.getElementsByClassName("situation-icon-finished")[props.quant].style.display="block"
     }
-    else if(dados.situacao==3){
+    else if(props.info.situacao==3){
       document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="none"
       document.getElementsByClassName("situation-icon-finished")[props.quant].style.display="none"
       document.getElementsByClassName("situation-icon-deleted")[props.quant].style.display="block"
@@ -53,7 +56,7 @@ function Demanda(props) {
     }) 
     .then(response=>{
         console.log(response.data)
-        props.enviarDados(dados,response.data)
+        props.enviarDados(props.info,response.data)
     })
     .catch(error=>console.log(error))
   }

@@ -3,6 +3,7 @@ import axios from "axios"
 import { useState } from "react"
 
 function CadastroDemanda(props){
+    const [cont,setCont] = useState(2)
 
     const createDemanda = () =>{
         let input1 = document.getElementById("cadastro-titulo-demanda")
@@ -34,7 +35,7 @@ function CadastroDemanda(props){
 
     const novaDemanda = () =>{
         createDemanda()
-        enviarDados()
+        enviarDados(cont+1)
     }
 
     const enviarDados = () =>{

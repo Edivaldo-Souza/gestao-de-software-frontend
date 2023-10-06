@@ -10,7 +10,7 @@ function DadosDemanda(props){
     const [devSelecionado,setDevSelecionado] = useState()
     const [valorDaPrioridade,setValorDaPrioridade] = useState(["Baixa","Média","Alta"])
     const [valorDaSituacao,setValorDaSituacao] = useState(["Em análise","Submetida","Concluída","Indeferida"])
-    const [cont,setCont] = useState(0)
+    const [cont,setCont] = useState(1)
     const [dataEncerramento,setDataEncerramento] = useState("Não definido")
 
 
@@ -33,8 +33,8 @@ function DadosDemanda(props){
 
     const closePopUp = () =>{
         document.getElementById("dados-demanda").style.display="none"
-        let data = new Date()
-        props.enviarDados(data.getSeconds())
+        setCont(cont+1)
+        console.log(cont)
     }
 
     const changePrioridade = (select)=>{
@@ -70,6 +70,7 @@ function DadosDemanda(props){
             }
         }).then(response=>{
             console.log(response.data)
+            props.enviarDados(cont+1)
             closePopUp()
         })
         .catch(error=>console.log(error))
@@ -100,6 +101,8 @@ function DadosDemanda(props){
             }
         }).then(response=>{
             console.log(response.data)
+            document.getElementById("dias-input").value=""
+            props.enviarDados(cont+1)
             closePopUp()
         })
         .catch(error=>console.log(error))
@@ -115,6 +118,7 @@ function DadosDemanda(props){
             }
         }).then(response=>{
             console.log(response.data)
+            props.enviarDados(cont+1)
             closePopUp()
         })
         .catch(error=>console.log(error))
@@ -149,6 +153,7 @@ function DadosDemanda(props){
         })
         .then(response=>
             {console.log(response.data)
+            document.getElementById("tarefas-input").value=""
              setCont(cont+1)
             }
         )
