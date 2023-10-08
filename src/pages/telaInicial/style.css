@@ -3,7 +3,7 @@
     background-color: #800E13;
     color: #ffffff;
     border-radius: 8px;
-    border-style: solid;
+    border-style: none;
     padding-top: 1%;
     padding-bottom: 1%;
     padding-left: 2%;
@@ -11,4 +11,16 @@
     margin: 0.2%;
     font-size: large;
     cursor: pointer;
+}
+
+.principal-section{
+    margin: 0% 3%;
+}
+.principal-section h1{
+    margin: 2% 0%;
+    display: flex;
+}
+
+.principal-section p{
+    text-align:justify;
 }

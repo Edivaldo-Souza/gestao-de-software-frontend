@@ -11,7 +11,7 @@ import axios from "axios"
 
 function TelaPrincipal(){
     const location = useLocation()
-    const [user,setUser] = useState(location.state.user)
+    const [user, setUser] = useState(location.state.user)
     var devs = []
     const [dadosDemanda,setDadosDemanda] = useState({
         titulo:"",
@@ -19,7 +19,7 @@ function TelaPrincipal(){
         dataCriacao:"",
         dataEncerramento:"",
     })
-    const [contador,setContador] = useState(0)
+    const [contador, setContador] = useState(0)
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="block"
@@ -36,14 +36,14 @@ function TelaPrincipal(){
     const disableCadastro = () =>{
         
         if(user.tipoUsuario==1 || user.tipoUsuario==2){
-           document.getElementsByClassName("create-demanda-button")[0].style.display="none" 
+            document.getElementsByClassName("create-demanda-button")[0].style.display="none" 
         }
     }
 
     const [openModal, setOpenModal] = useState(false);
 
     useEffect(()=>{
-        document.title = `Home: dev4U()`;
+        document.title = `Main: dev4U()`;
         disableCadastro()
     },[])
 

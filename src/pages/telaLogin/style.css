@@ -1,22 +1,40 @@
 #container{
     display: flex;
+    position: fixed;
     background-color: #38040E;
+    width: 100%;
 }
 
 .form{
-    display: block;
-    width: 50%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 60%;
+    height: 100vh;
     background-color: white;
 }
 
-.form input{
+.input-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-form label{
+    align-self: baseline;
+    padding-left: 4rem;
+    color: #640D14;
+    font-size: larger;
+}
+
+.input-form input{
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 20px;
     border-color: #640D14;
     height: 40px;
     width: 80%;
     margin-bottom: 20px;
-
+    font-size: medium;
+    padding: 0rem 1rem;
 }
 
 .buttons{
@@ -24,10 +42,10 @@
 }
 
 .buttons button{
-    width: 15%;
+    width: 20%;
     height: 40px;
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
@@ -37,6 +55,6 @@
 }
 
 .image img{
-    max-height: 100vh;
     min-width: 100%;
+    object-fit: cover;
 }

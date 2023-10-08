@@ -2,7 +2,7 @@ import './App.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Login from './pages/telaLogin'
 import Cadastro from './pages/telaCadastro';
-import TelaPrincipal from './pages/telaPrincipal';
+import TelaPrincipal from './pages/TelaPrincipal';
 import TelaInicial from './pages/telaInicial';
 
 function App() {
