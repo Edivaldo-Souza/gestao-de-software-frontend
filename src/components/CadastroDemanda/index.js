@@ -3,7 +3,8 @@ import axios from "axios"
 import { useState } from "react"
 
 function CadastroDemanda(props){
-    const [cont,setCont] = useState(2)
+    const [cont,setCont] = useState(5)
+    const [demanda,setDemanda] = useState()
 
     const createDemanda = () =>{
         let input1 = document.getElementById("cadastro-titulo-demanda")
@@ -27,6 +28,8 @@ function CadastroDemanda(props){
         })
         .then(response=>{
             toggleCadastro()
+            console.log(response.data)
+            enviarDados()
         })
         .catch(error=>{
             console.log(props.uuid)
@@ -35,16 +38,17 @@ function CadastroDemanda(props){
 
     const novaDemanda = () =>{
         createDemanda()
-        enviarDados(cont+1)
     }
 
     const enviarDados = () =>{
-        props.enviarDadosTelaPrincipal(1)
+        setCont(cont*4)
+        props.enviarDadosTelaPrincipal(cont)
     }
 
     const toggleCadastro = () =>{
         document.getElementById("cadastro-demanda").style.display="none" 
-        
+        document.getElementById("cadastro-titulo-demanda").value=""
+        document.getElementById("cadastro-descricao-demanda").value=""
     }
 
     return(

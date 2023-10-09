@@ -235,7 +235,7 @@ function DadosDemanda(props){
         </div>
         </div>
         <textarea id="tarefas-input" style={{width:"50%",marginLeft:"40%"}}></textarea>
-        <button id="add-tarefa-button"onClick={addTarefa} style={{bottom:"15%",right:"5%",backgroundColor:"#6A2921"}}>Adicionar</button> 
+        <button id="add-tarefa-button"onClick={addTarefa} style={{bottom:"10%",right:"5%",backgroundColor:"#6A2921"}}>Adicionar</button> 
         <button className="avaliador-buttons" style={{bottom: "12%"}} onClick={submeterDemanda}>Encaminhar Demanda</button>
         <button  className="avaliador-buttons" onClick={()=>concluirProduto(3)} style={{backgroundColor:"red"}}>Indefir Demanda</button>
         <button  className="dev-buttons" onClick={definirDataEncerramento} style={{bottom: "12%",left:"5%"}}>Salvar Alterações</button>

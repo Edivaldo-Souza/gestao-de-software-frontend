@@ -27,7 +27,7 @@ function TelaPrincipal(){
     }   
 
     const receberDadosCadastro = (dados) =>{
-        setContador(dados)
+        setContador(dados*3)
     }
 
     const receberDadosDemanda = (dados,tarefas)=>{

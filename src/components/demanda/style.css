@@ -9,7 +9,7 @@
 
 .demanda-container img{
     position: absolute;
-    height: 15%;
+    max-height: 10%;
 }
 
 .title{

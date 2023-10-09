@@ -7,8 +7,6 @@ function Demanda(props) {
   const [dados,setDados] = useState(props.info)
   const [tarefas,setTarefas] = useState()
   const [valorDaSituacao,setValorDaSituacao] = useState(["Em análise","Submetida","Concluída","Indeferida"])
-  const title = props.title;
-  const notes = props.notes;
 
   const [isModalOpen, setIsModalOpen] = useState(0);
 
@@ -35,24 +33,24 @@ function Demanda(props) {
   const definirSituacao = () =>{
     if(props.info.situacao==1){
       document.getElementsByClassName("delete-demanda-button")[props.quant].style.display="none"
-      document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="block"
+      //document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="block"
     }
     else if(props.info.situacao==2){
       document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="none"
-      document.getElementsByClassName("situation-icon-deleted")[props.quant].style.display="none"
-      document.getElementsByClassName("situation-icon-finished")[props.quant].style.display="block"
+      //document.getElementsByClassName("situation-icon-deleted")[props.quant].style.display="none"
+      //document.getElementsByClassName("situation-icon-finished")[props.quant].style.display="block"
     }
     else if(props.info.situacao==3){
       document.getElementsByClassName("situation-icon-submited")[props.quant].style.display="none"
-      document.getElementsByClassName("situation-icon-finished")[props.quant].style.display="none"
-      document.getElementsByClassName("situation-icon-deleted")[props.quant].style.display="block"
+      //document.getElementsByClassName("situation-icon-finished")[props.quant].style.display="none"
+      //document.getElementsByClassName("situation-icon-deleted")[props.quant].style.display="block"
     }
   }
 
   const getTarefas = () =>{
     axios({
         method:"get",
-        url:"http://localhost:8080/api/tarefa/"+dados.uuid,
+        url:"http://localhost:8080/api/tarefa/"+props.info.uuid,
     }) 
     .then(response=>{
         console.log(response.data)
@@ -72,9 +70,9 @@ function Demanda(props) {
       <img className="situation-icon-deleted" style={{display:"none",left:"3%", height:"20%"}} src="images/deleted.png"/>
       <img className="situation-icon-finished" style={{display:"none",left:"3%", height:"20%"}} src="images/finished.png"/>
       <img className="situation-icon-submited" style={{display:"none",left:"3%", height:"20%"}} src="images/gear.svg"/>
-      <p className="title">{title}</p>
-      <p className="notes">{notes}</p>
-      <p>Situação: {valorDaSituacao[dados.situacao]}</p>
+      <p className="title">{props.info.titulo}</p>
+      <p className="notes">{props.info.descricao}</p>
+      <p>Situação: {valorDaSituacao[props.info.situacao]}</p>
       <div className="button-demanda-container">
         <button onClick={openPopUp}>Ver detalhes</button>
       </div>
